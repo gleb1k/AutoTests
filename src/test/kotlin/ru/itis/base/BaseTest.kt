@@ -7,7 +7,7 @@ import java.time.Duration
 
 open class BaseTest {
 
-    val driver = DriverManager.chromeDriver()
+    val driver = DriverManager.chromeDriver
 
     fun waitLoading(seconds: Long) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds))
@@ -22,15 +22,16 @@ open class BaseTest {
         fun open() {
             //когда тут указываю то ругается на версию хрома
             //ноут
-            //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTest\\chromedriver_win64\\chromedriver.exe")
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTests2\\chromedriver_win64\\chromedriver.exe")
             //комп
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
-            DriverManager.chromeDriver().get(BASE_URL)
+            //System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
+            DriverManager.chromeDriver.get(BASE_URL)
+            DriverManager.chromeDriver.get(BASE_URL)
         }
 
         @After
         fun clearCock(){
-            DriverManager.chromeDriver().manage().deleteAllCookies()
+            DriverManager.chromeDriver.manage().deleteAllCookies()
         }
 
 //        @JvmStatic

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement
 
 class MainPage {
 
-    private val driver: WebDriver = DriverManager.chromeDriver()
+    private val driver: WebDriver = DriverManager.chromeDriver
 
     fun startCreateFolderButton(): WebElement = driver.findElement(By.xpath("/html/body/div[2]/div[6]/div/div/div/div/div[2]/div/div[1]/div/div/div[3]/div/button"))
     fun nameField(): WebElement = driver.findElement(By.xpath("/html/body/div[10]/div/div/div/div[2]/div[1]/span/input"))

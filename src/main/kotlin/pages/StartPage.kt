@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement
 
 class StartPage {
 
-    private val driver: WebDriver = DriverManager.chromeDriver()
+    private val driver: WebDriver = DriverManager.chromeDriver
 
     fun loginButton(): WebElement = driver.findElement(By.xpath("/html/body/div[1]/div/div/nav/div[2]/div[3]/a"))
 

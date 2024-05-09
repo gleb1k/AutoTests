@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement
 
 class LoginPage {
 
-    private val driver: WebDriver = DriverManager.chromeDriver()
+    private val driver: WebDriver = DriverManager.chromeDriver
 
    // fun loginField(): WebElement = driver.findElement(By.cssSelector("input[name='susi_email']"))"/html/body/div[1]/div[2]/div/div/div/div/div/div/div/div[2]/form/div[1]/div[1]/input[1]"
 
