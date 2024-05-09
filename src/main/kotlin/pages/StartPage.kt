@@ -8,6 +8,6 @@ class StartPage {
 
     private val driver: WebDriver = DriverManager.chromeDriver
 
-    fun loginButton(): WebElement = driver.findElement(By.xpath("/html/body/div[1]/div/div/nav/div[2]/div[3]/a"))
+    fun loginButton(): WebElement = driver.findElement(By.xpath("/html/body/header/div[1]/div/div[2]/a[3]"))
 
 }
