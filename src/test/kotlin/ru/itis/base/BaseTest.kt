@@ -2,6 +2,7 @@ package ru.itis.base
 
 import DriverManager
 import org.junit.After
+import org.junit.AfterClass
 import org.junit.BeforeClass
 import java.time.Duration
 
@@ -22,10 +23,9 @@ open class BaseTest {
         fun open() {
             //когда тут указываю то ругается на версию хрома
             //ноут
-            //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTests2\\chromedriver_win64\\chromedriver.exe")
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTests2\\chromedriver_win64\\chromedriver.exe")
             //комп
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
-            DriverManager.chromeDriver.get(BASE_URL)
+            //System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
             DriverManager.chromeDriver.get(BASE_URL)
         }
 
@@ -34,11 +34,11 @@ open class BaseTest {
             DriverManager.chromeDriver.manage().deleteAllCookies()
         }
 
-//        @JvmStatic
-//        @AfterClass
-//        fun close() {
-//            driverInstance.close()
-//        }
+        @JvmStatic
+        @AfterClass
+        fun close() {
+            //DriverManager.chromeDriver.close()
+        }
 
     }
 }

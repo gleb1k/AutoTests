@@ -11,8 +11,8 @@ class LoginPage {
 
     fun loginField(): WebElement = driver.findElement(By.id("login-name2"))
     fun passwordField(): WebElement = driver.findElement(By.id("login-password2"))
-
     fun singInButton(): WebElement = driver.findElement(By.xpath("/html/body/div[6]/div[1]/div[2]/div[2]/div[2]/div[1]/form/button"))
+
 
     companion object {
         const val EMAIL = "gleb.gafeev2@gmail.com"

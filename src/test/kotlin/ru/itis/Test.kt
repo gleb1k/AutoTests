@@ -1,5 +1,6 @@
 package ru.itis
 
+import actions.Actions
 import org.junit.Test
 import pages.LoginPage
 import pages.StoragePage
@@ -9,35 +10,36 @@ import kotlin.random.Random
 
 class Test : BaseTest() {
 
-    private val loginPage = LoginPage()
+    private val actions = Actions()
 
-    private val storagePage = StoragePage()
+    @Test
+    fun signIn() {
+        waitLoading(2)
+        actions.navigateToLoginPage()
+        waitLoading(4)
+        actions.login(LoginPage.EMAIL, LoginPage.PASSWORD)
+        waitLoading(6)
 
-    private val startPage = StartPage()
+        actions.logout()
+    }
 
     @Test
     fun signInAndCreateFolder() {
         waitLoading(2)
-        startPage.loginButton().click()
-
+        actions.navigateToLoginPage()
         waitLoading(4)
+        actions.login(LoginPage.EMAIL, LoginPage.PASSWORD)
+        waitLoading(6)
+        actions.createFolder(StoragePage.FOLDER_NAME + Random.nextInt())
 
-        login(LoginPage.EMAIL, LoginPage.PASSWORD)
-
-        storagePage.startCreateFolderButton().click()
-        waitLoading(4)
-        storagePage.nameField().sendKeys(StoragePage.FOLDER_NAME + Random.nextInt())
-        waitLoading(4)
-        storagePage.endCreateFolderButton().click()
+        actions.logout()
     }
+    @Test
+    fun signInAndEditFolder() {
 
-    private fun login(login: String, password: String) {
-        loginPage.loginField().sendKeys(login)
-        waitLoading(2)
-        loginPage.passwordField().sendKeys(password)
-        waitLoading(2)
-        loginPage.singInButton().click()
-        waitLoading(20)
     }
+    @Test
+    fun signInAndDeleteFolder() {
 
+    }
 }
