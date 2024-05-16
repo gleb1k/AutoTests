@@ -19,7 +19,7 @@ class Test : BaseTest() {
         Assert.assertTrue(loginButton.isDisplayed)
 
         actions.navigateToLoginPage()
-        actions.login(LoginPage.EMAIL, LoginPage.PASSWORD)
+        actions.login(username, password)
     }
 
     @Test
@@ -33,9 +33,11 @@ class Test : BaseTest() {
     fun signInAndCreateFolder() {
         toStartThenLogin()
         waitLoading(6)
-        val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
-        actions.createFolder(folderName)
-        Assert.assertNotNull(actions.getFolderByTitle(folderName))
+        val folders = FolderParser.getFoldersFromFile("generated")
+        folders.forEach {
+            actions.createFolder(it.name)
+        }
+        Assert.assertNotNull(actions.getFolderByTitle(folders.first().name))
         actions.logout()
     }
 
@@ -58,7 +60,11 @@ class Test : BaseTest() {
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
         actions.createFolder(folderName)
         actions.deleteFolder(folderName)
-        Assert.assertThrows(org.openqa.selenium.NoSuchElementException::class.java) { actions.getFolderByTitle(folderName) }
+        Assert.assertThrows(org.openqa.selenium.NoSuchElementException::class.java) {
+            actions.getFolderByTitle(
+                folderName
+            )
+        }
         actions.logout()
     }
 }

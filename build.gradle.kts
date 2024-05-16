@@ -11,6 +11,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.8.8")
     implementation("org.seleniumhq.selenium:selenium-java:4.19.1")
     testImplementation(kotlin("test"))
     testImplementation("junit:junit:4.13.2")

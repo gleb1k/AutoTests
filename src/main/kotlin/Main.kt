@@ -1,8 +1,13 @@
-import org.openqa.selenium.manager.SeleniumManager
 
 fun main() {
-   //ноут
-   //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTest\\chromedriver_win64\\chromedriver.exe")
-   //комп
-   //System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
+    val generator = Generator()
+    "generated"
+    println("File name:")
+    val filename = readln()
+    println("Count:")
+    val count = readln().toInt()
+    generator.generate(filename, count)
+
+    val folders = FolderParser.getFoldersFromFile(filename)
+    println(folders.toString())
 }

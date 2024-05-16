@@ -4,7 +4,9 @@ import DriverManager
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.BeforeClass
+import java.io.FileInputStream
 import java.time.Duration
+import java.util.*
 
 open class BaseTest {
 
@@ -16,24 +18,36 @@ open class BaseTest {
 
     companion object {
 
-        private const val BASE_URL = "https://mega.io/ru/storage"
+        private val properties = Properties()
+        var url: String
+        var username: String
+        var password: String
+
+        init {
+            properties.load(FileInputStream("config.properties"))
+
+            url = properties.getProperty("url")
+            username = properties.getProperty("email")
+            password = properties.getProperty("password")
+        }
 
         @JvmStatic
         @BeforeClass
         fun open() {
-            //когда тут указываю то ругается на версию хрома
             //ноут
             //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTests2\\chromedriver_win64\\chromedriver.exe")
             //комп
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
-            DriverManager.chromeDriver.get(BASE_URL)
+            System.setProperty(
+                "webdriver.chrome.driver",
+                "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe"
+            )
+            DriverManager.chromeDriver.get(url)
         }
 
         @After
-        fun clearCookies(){
+        fun clearCookies() {
             DriverManager.chromeDriver.manage().deleteAllCookies()
-            Thread.sleep(2000)
-           // DriverManager.chromeDriver.navigate().to(BASE_URL)
+            Thread.sleep(1000)
         }
 
         @JvmStatic
