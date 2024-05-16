@@ -1,5 +1,6 @@
 package actions
 
+import org.openqa.selenium.WebElement
 import pages.LoginPage
 import pages.StartPage
 import pages.StoragePage
@@ -20,13 +21,17 @@ class Actions {
         Thread.sleep(10000)
     }
 
+    fun getLoginButton() : WebElement = startPage.loginButton()
+
+    fun getFolderByTitle(title: String) : WebElement = storagePage.folder(title)
+
     fun login(login: String, password: String) {
         Thread.sleep(1000)
         loginPage.loginField().sendKeys(login)
         Thread.sleep(1000)
         loginPage.passwordField().sendKeys(password)
         Thread.sleep(1000)
-        loginPage.singInButton().click()
+        loginPage.signInButton().click()
 
         Thread.sleep(10000)
     }
@@ -38,6 +43,7 @@ class Actions {
         storagePage.nameField().sendKeys(folderName)
         Thread.sleep(1000)
         storagePage.endCreateFolderButton().click()
+        Thread.sleep(2000)
     }
 
     fun renameFolder(folderName: String, newName: String) {
@@ -50,6 +56,7 @@ class Actions {
         storagePage.renameField().sendKeys(newName)
         Thread.sleep(1000)
         storagePage.renameButtonEnd().click()
+        Thread.sleep(4000)
     }
 
     fun deleteFolder(folderName: String) {

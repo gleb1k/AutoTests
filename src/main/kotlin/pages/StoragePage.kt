@@ -15,7 +15,7 @@ class StoragePage {
     fun exitButtonInProfile(): WebElement =driver.findElement(By.xpath("/html/body/div[6]/div[2]/div[3]/div[1]/div[4]/section[1]/div[7]/div[8]/div/div/div[2]/ul/li[7]/button"))
 
     //delete
-    fun folder(title: String): WebElement = driver.findElement(By.xpath("//span[contains(text(), '" + title + "')]"));
+    fun folder(title: String): WebElement = driver.findElement(By.xpath("//span[contains(text(), '$title')]"))
     fun deleteFolderButton() : WebElement = driver.findElement(By.xpath("/html/body/div[6]/div[2]/div[3]/div[1]/div[7]/div[46]/div/button[19]"))
 
     //edit

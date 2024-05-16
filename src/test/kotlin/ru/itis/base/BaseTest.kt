@@ -16,16 +16,16 @@ open class BaseTest {
 
     companion object {
 
-        const val BASE_URL = "https://mega.io/ru/storage"
+        private const val BASE_URL = "https://mega.io/ru/storage"
 
         @JvmStatic
         @BeforeClass
         fun open() {
             //когда тут указываю то ругается на версию хрома
             //ноут
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTests2\\chromedriver_win64\\chromedriver.exe")
+            //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Gleb\\IdeaProjects\\AutoTests2\\chromedriver_win64\\chromedriver.exe")
             //комп
-            //System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe")
             DriverManager.chromeDriver.get(BASE_URL)
         }
 

@@ -1,6 +1,7 @@
 package ru.itis
 
 import actions.Actions
+import org.junit.Assert
 import org.junit.Test
 import pages.LoginPage
 import pages.StoragePage
@@ -14,6 +15,9 @@ class Test : BaseTest() {
 
     private fun toStartThenLogin() {
         actions.navigateToStartPage()
+        val loginButton = actions.getLoginButton()
+        Assert.assertTrue(loginButton.isDisplayed)
+
         actions.navigateToLoginPage()
         actions.login(LoginPage.EMAIL, LoginPage.PASSWORD)
     }
@@ -21,6 +25,7 @@ class Test : BaseTest() {
     @Test
     fun signIn() {
         toStartThenLogin()
+        Assert.assertEquals(driver.title, "MEGA")
         actions.logout()
     }
 
@@ -28,23 +33,32 @@ class Test : BaseTest() {
     fun signInAndCreateFolder() {
         toStartThenLogin()
         waitLoading(6)
-        actions.createFolder(StoragePage.FOLDER_NAME + Random.nextInt())
+        val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
+        actions.createFolder(folderName)
+        Assert.assertNotNull(actions.getFolderByTitle(folderName))
         actions.logout()
     }
+
     @Test
     fun signInAndEditFolder() {
         toStartThenLogin()
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
         actions.createFolder(folderName)
-        actions.renameFolder(folderName, "folderRenamed" +  Random.nextInt())
+        val folderBeforeRenaming = actions.getFolderByTitle(folderName)
+        val renamedFolderName = "folderRenamed" + Random.nextInt()
+        actions.renameFolder(folderName, renamedFolderName)
+        val folderAfterRenaming = actions.getFolderByTitle(renamedFolderName)
+        Assert.assertNotEquals(folderBeforeRenaming, folderAfterRenaming)
         actions.logout()
     }
+
     @Test
     fun signInAndDeleteFolder() {
         toStartThenLogin()
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
         actions.createFolder(folderName)
         actions.deleteFolder(folderName)
+        Assert.assertThrows(org.openqa.selenium.NoSuchElementException::class.java) { actions.getFolderByTitle(folderName) }
         actions.logout()
     }
 }
