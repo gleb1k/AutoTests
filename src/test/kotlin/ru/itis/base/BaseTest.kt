@@ -30,8 +30,10 @@ open class BaseTest {
         }
 
         @After
-        fun clearCock(){
+        fun clearCookies(){
             DriverManager.chromeDriver.manage().deleteAllCookies()
+            Thread.sleep(2000)
+           // DriverManager.chromeDriver.navigate().to(BASE_URL)
         }
 
         @JvmStatic
