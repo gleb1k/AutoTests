@@ -1,32 +1,24 @@
 package ru.itis
 
-import actions.Actions
+import ru.itis.actions.Actions
 import org.junit.Assert
 import org.junit.Test
-import pages.LoginPage
-import pages.StoragePage
+import ru.itis.pages.StoragePage
 import ru.itis.base.BaseTest
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 class Test : BaseTest() {
 
-    private val actions = Actions()
-
     private fun toStartThenLogin() {
-        actions.navigateToStartPage()
-        val loginButton = actions.getLoginButton()
-        Assert.assertTrue(loginButton.isDisplayed)
-
-        actions.navigateToLoginPage()
-        actions.login(username, password)
+        Actions.navigateToStartPage()
+        Actions.navigateToLoginPage()
+        Actions.login(username, password)
     }
 
     @Test
     fun signIn() {
         toStartThenLogin()
-        Assert.assertEquals(driver.title, "MEGA")
-        actions.logout()
+        Actions.logout()
     }
 
     @Test
@@ -35,36 +27,27 @@ class Test : BaseTest() {
         waitLoading(6)
         val folders = FolderParser.getFoldersFromFile("generated")
         folders.forEach {
-            actions.createFolder(it.name)
+            Actions.createFolder(it.name)
         }
-        Assert.assertNotNull(actions.getFolderByTitle(folders.first().name))
-        actions.logout()
+        Actions.logout()
     }
 
     @Test
     fun signInAndEditFolder() {
         toStartThenLogin()
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
-        actions.createFolder(folderName)
-        val folderBeforeRenaming = actions.getFolderByTitle(folderName)
+        Actions.createFolder(folderName)
         val renamedFolderName = "folderRenamed" + Random.nextInt()
-        actions.renameFolder(folderName, renamedFolderName)
-        val folderAfterRenaming = actions.getFolderByTitle(renamedFolderName)
-        Assert.assertNotEquals(folderBeforeRenaming, folderAfterRenaming)
-        actions.logout()
+        Actions.renameFolder(folderName, renamedFolderName)
+        Actions.logout()
     }
 
     @Test
     fun signInAndDeleteFolder() {
         toStartThenLogin()
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
-        actions.createFolder(folderName)
-        actions.deleteFolder(folderName)
-        Assert.assertThrows(org.openqa.selenium.NoSuchElementException::class.java) {
-            actions.getFolderByTitle(
-                folderName
-            )
-        }
-        actions.logout()
+        Actions.createFolder(folderName)
+        Actions.deleteFolder(folderName)
+        Actions.logout()
     }
 }

@@ -1,6 +1,6 @@
 package ru.itis.base
 
-import DriverManager
+import ru.itis.DriverManager
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.BeforeClass
@@ -53,7 +53,7 @@ open class BaseTest {
         @JvmStatic
         @AfterClass
         fun close() {
-            //DriverManager.chromeDriver.close()
+            DriverManager.chromeDriver.close()
         }
 
     }
