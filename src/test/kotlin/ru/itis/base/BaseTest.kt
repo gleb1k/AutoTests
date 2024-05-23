@@ -10,10 +10,8 @@ import java.util.*
 
 open class BaseTest {
 
-    val driver = DriverManager.chromeDriver
-
     fun waitLoading(seconds: Long) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds))
+        DriverManager.chromeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds))
     }
 
     companion object {
