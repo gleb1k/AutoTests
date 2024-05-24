@@ -2,7 +2,7 @@ package ru.itis.actions
 
 import org.junit.Assert
 import org.openqa.selenium.WebElement
-import ru.itis.DriverManager
+import ru.itis.manager.DriverManager
 import ru.itis.pages.LoginPage
 import ru.itis.pages.StartPage
 import ru.itis.pages.StoragePage
@@ -33,6 +33,17 @@ object Actions {
         LoginPage.signInButton().click()
         Thread.sleep(10000)
         Assert.assertEquals(DriverManager.chromeDriver.title, "MEGA")
+    }
+
+    fun loginFailed(login: String, password: String) {
+        Thread.sleep(1000)
+        LoginPage.loginField().sendKeys(login)
+        Thread.sleep(1000)
+        LoginPage.passwordField().sendKeys(password)
+        Thread.sleep(1000)
+        LoginPage.signInButton().click()
+        Thread.sleep(10000)
+        Assert.assertEquals(DriverManager.chromeDriver.title, "Вход - MEGA")
     }
 
     fun createFolder(folderName: String) {
@@ -81,4 +92,7 @@ object Actions {
         Thread.sleep(2000)
         StartPage.navigateToStartPage()
     }
+
+    fun isLoggedIn() : Boolean = DriverManager.chromeDriver.currentUrl != "https://mega.nz/login"
+
 }

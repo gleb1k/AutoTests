@@ -1,9 +1,9 @@
 fun main(args: Array<String>) {
     val generator = Generator()
-    val filename = args[1]
-    val count = args[2].toInt()
+    "generated"
+    println("File name:")
+    val filename = readln()
+    println("Count:")
+    val count = readln().toInt()
     generator.generate(filename, count)
-
-    val folders = FolderParser.getFoldersFromFile(filename)
-    println(folders.toString())
 }

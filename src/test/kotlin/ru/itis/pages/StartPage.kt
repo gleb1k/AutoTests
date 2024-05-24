@@ -2,7 +2,7 @@ package ru.itis.pages
 
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
-import ru.itis.DriverManager
+import ru.itis.manager.DriverManager
 
 object StartPage {
 

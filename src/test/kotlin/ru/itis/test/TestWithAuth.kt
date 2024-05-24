@@ -1,53 +1,32 @@
-package ru.itis
+package ru.itis.test
 
-import ru.itis.actions.Actions
-import org.junit.Assert
 import org.junit.Test
+import ru.itis.actions.Actions
 import ru.itis.pages.StoragePage
-import ru.itis.base.BaseTest
+import ru.itis.test.base.AuthBaseTest
 import kotlin.random.Random
 
-class Test : BaseTest() {
-
-    private fun toStartThenLogin() {
-        Actions.navigateToStartPage()
-        Actions.navigateToLoginPage()
-        Actions.login(username, password)
-    }
-
+class TestWithAuth : AuthBaseTest() {
     @Test
-    fun signIn() {
-        toStartThenLogin()
-        Actions.logout()
-    }
-
-    @Test
-    fun signInAndCreateFolder() {
-        toStartThenLogin()
-        waitLoading(6)
+    fun createFolder() {
         val folders = FolderParser.getFoldersFromFile("generated")
         folders.forEach {
             Actions.createFolder(it.name)
         }
-        Actions.logout()
     }
 
     @Test
-    fun signInAndEditFolder() {
-        toStartThenLogin()
+    fun editFolder() {
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
         Actions.createFolder(folderName)
         val renamedFolderName = "folderRenamed" + Random.nextInt()
         Actions.renameFolder(folderName, renamedFolderName)
-        Actions.logout()
     }
 
     @Test
-    fun signInAndDeleteFolder() {
-        toStartThenLogin()
+    fun deleteFolder() {
         val folderName = StoragePage.FOLDER_NAME + Random.nextInt()
         Actions.createFolder(folderName)
         Actions.deleteFolder(folderName)
-        Actions.logout()
     }
 }

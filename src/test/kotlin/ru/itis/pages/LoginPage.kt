@@ -1,6 +1,6 @@
 package ru.itis.pages
 
-import ru.itis.DriverManager
+import ru.itis.manager.DriverManager
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 

@@ -1,25 +1,23 @@
-package ru.itis.base
+package ru.itis.test.base
 
-import ru.itis.DriverManager
 import org.junit.After
 import org.junit.AfterClass
+import org.junit.Before
 import org.junit.BeforeClass
+import ru.itis.actions.Actions
+import ru.itis.manager.AuthManager
+import ru.itis.manager.DriverManager
 import java.io.FileInputStream
-import java.time.Duration
 import java.util.*
 
-open class BaseTest {
-
-    fun waitLoading(seconds: Long) {
-        DriverManager.chromeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds))
-    }
-
+open class AuthBaseTest {
     companion object {
 
         private val properties = Properties()
         var url: String
         var username: String
         var password: String
+        val authManager: AuthManager = AuthManager()
 
         init {
             properties.load(FileInputStream("config.properties"))
@@ -28,6 +26,7 @@ open class BaseTest {
             username = properties.getProperty("email")
             password = properties.getProperty("password")
         }
+
 
         @JvmStatic
         @BeforeClass
@@ -39,20 +38,28 @@ open class BaseTest {
                 "webdriver.chrome.driver",
                 "C:\\Users\\gleb\\IdeaProjects\\AutoTests\\chromedriver_win64\\chromedriver.exe"
             )
-            DriverManager.chromeDriver.get(url)
-        }
-
-        @After
-        fun clearCookies() {
-            DriverManager.chromeDriver.manage().deleteAllCookies()
-            Thread.sleep(1000)
+            DriverManager.chromeDriver.get(BaseTest.url)
         }
 
         @JvmStatic
         @AfterClass
-        fun close() {
+        fun closeDriver() {
             DriverManager.chromeDriver.close()
         }
 
+    }
+
+    @Before
+    fun setUp() {
+        Actions.navigateToStartPage()
+        Actions.navigateToLoginPage()
+        authManager.login(username, password)
+    }
+
+    @After
+    fun cleanUp() {
+//        DriverManager.chromeDriver.manage().deleteAllCookies()
+//        Thread.sleep(1000)
+        authManager.logout()
     }
 }
