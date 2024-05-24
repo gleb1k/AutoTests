@@ -9,7 +9,7 @@ class AuthManager {
 
     fun login(username: String, password: String) {
         if (authorizedLogin != username) {
-            if (Actions.isLoggedIn()) {
+            if (Actions.isAuthorized()) {
                 logout()
             }
             loginInternal(username, password)
@@ -19,7 +19,7 @@ class AuthManager {
     private fun loginInternal(username: String, password: String) {
         Actions.login(username, password)
 
-        authorizedLogin = if (Actions.isLoggedIn()) {
+        authorizedLogin = if (Actions.isAuthorized()) {
             username
         } else {
             null

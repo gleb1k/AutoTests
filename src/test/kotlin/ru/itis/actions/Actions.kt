@@ -93,6 +93,6 @@ object Actions {
         StartPage.navigateToStartPage()
     }
 
-    fun isLoggedIn() : Boolean = DriverManager.chromeDriver.currentUrl != "https://mega.nz/login"
+    fun isAuthorized() : Boolean = DriverManager.chromeDriver.currentUrl != "https://mega.nz/login"
 
 }
